@@ -1,0 +1,29 @@
+/*
+Process ex1 {
+	processElements {
+		WorkDefinition a {},
+		WorkDefinition b {},
+		WorkDefinition c {},
+		
+		WorkSequence {
+			linkType startToStart
+			predecessor a
+			successor b
+		},
+		
+		WorkSequence {
+			linkType finishToFinish
+			predecessor b
+			successor c
+		}
+	}
+}
+*/
+
+process ex1 {
+	wd a
+	wd b
+	wd c
+	ws s2s from a to b
+	ws f2f from b to c
+}

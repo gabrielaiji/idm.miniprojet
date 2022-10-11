@@ -70,11 +70,17 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Guidance returns Guidance
 	 *
 	 * Constraint:
-	 *     (text=EString? (elements+=[ProcessElement|EString] elements+=[ProcessElement|EString]*)?)
+	 *     text=STRING
 	 * </pre>
 	 */
 	protected void sequence_Guidance(ISerializationContext context, Guidance semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SimplepdlPackage.Literals.GUIDANCE__TEXT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimplepdlPackage.Literals.GUIDANCE__TEXT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGuidanceAccess().getTextSTRINGTerminalRuleCall_2_0(), semanticObject.getText());
+		feeder.finish();
 	}
 	
 	
@@ -99,7 +105,7 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Process returns Process
 	 *
 	 * Constraint:
-	 *     (name=EString (processElements+=ProcessElement processElements+=ProcessElement*)?)
+	 *     (name=EString processElements+=ProcessElement*)
 	 * </pre>
 	 */
 	protected void sequence_Process(ISerializationContext context, simplepdl.Process semanticObject) {
@@ -161,16 +167,17 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WorkDefinition returns WorkDefinition
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=EString 
-	 *         (linksToPredecessors+=[WorkSequence|EString] linksToPredecessors+=[WorkSequence|EString]*)? 
-	 *         (linksToSuccessors+=[WorkSequence|EString] linksToSuccessors+=[WorkSequence|EString]*)? 
-	 *         (usefulRessources+=UsefulRessource usefulRessources+=UsefulRessource*)?
-	 *     )
+	 *     name=EString
 	 * </pre>
 	 */
 	protected void sequence_WorkDefinition(ISerializationContext context, WorkDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SimplepdlPackage.Literals.WORK_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimplepdlPackage.Literals.WORK_DEFINITION__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getWorkDefinitionAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -181,7 +188,7 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WorkSequence returns WorkSequence
 	 *
 	 * Constraint:
-	 *     (linkType=WorkSequenceType predecessor=[WorkDefinition|EString] successor=[WorkDefinition|EString])
+	 *     (linkType=WorkSequenceType predecessor=[WorkDefinition|ID] successor=[WorkDefinition|ID])
 	 * </pre>
 	 */
 	protected void sequence_WorkSequence(ISerializationContext context, WorkSequence semanticObject) {
@@ -194,9 +201,9 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimplepdlPackage.Literals.WORK_SEQUENCE__SUCCESSOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWorkSequenceAccess().getLinkTypeWorkSequenceTypeEnumRuleCall_3_0(), semanticObject.getLinkType());
-		feeder.accept(grammarAccess.getWorkSequenceAccess().getPredecessorWorkDefinitionEStringParserRuleCall_5_0_1(), semanticObject.eGet(SimplepdlPackage.Literals.WORK_SEQUENCE__PREDECESSOR, false));
-		feeder.accept(grammarAccess.getWorkSequenceAccess().getSuccessorWorkDefinitionEStringParserRuleCall_7_0_1(), semanticObject.eGet(SimplepdlPackage.Literals.WORK_SEQUENCE__SUCCESSOR, false));
+		feeder.accept(grammarAccess.getWorkSequenceAccess().getLinkTypeWorkSequenceTypeEnumRuleCall_1_0(), semanticObject.getLinkType());
+		feeder.accept(grammarAccess.getWorkSequenceAccess().getPredecessorWorkDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(SimplepdlPackage.Literals.WORK_SEQUENCE__PREDECESSOR, false));
+		feeder.accept(grammarAccess.getWorkSequenceAccess().getSuccessorWorkDefinitionIDTerminalRuleCall_5_0_1(), semanticObject.eGet(SimplepdlPackage.Literals.WORK_SEQUENCE__SUCCESSOR, false));
 		feeder.finish();
 	}
 	
