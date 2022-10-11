@@ -1,0 +1,30 @@
+import 'PetriNet.ecore'
+
+package petriNet
+
+context Arc
+inv nonReflexif(self.source.name + ' a une arc réflexive.'):
+	self.source <> self.target
+	
+inv poidsNonNegatif('Un arc a un poids négatif'):
+	self.weight >= 0
+	
+inv noTransitionToTransition('Un arc ne peut pas partir d\'une transition et pointer sur une transition.'):
+	not(self.source.oclIsKindOf(Transition) and self.target.oclIsKindOf(Transition))
+		
+inv noPlaceToPlace('Un arc ne peut pas partir d\'une place et pointer sur une place.'):
+	not(self.source.oclIsKindOf(Place) and self.target.oclIsKindOf(Place))
+	
+inv readArcFromPlace('Un read arc ne peut pas partir d\'une transition.'):
+	self.arcType = 1 implies self.source.oclIsKindOf(Place)
+			
+	
+context Place
+inv poidsNonNegatif(self.name + ' a un nombre négatif de jetons'):
+	self.nbTokens >= 0
+	
+	
+
+
+
+endpackage

@@ -3,28 +3,33 @@ import 'SimplePDL.ecore'
 package simplepdl
 
 context Process
-inv NomsUniques('Noms non uniques'):
+inv NomsUniques ('noms doublons'):
 	self.processElements -> select(p : ProcessElement | p.oclIsKindOf(WorkDefinition))
-						 -> collect(p : ProcessElement | p.oclAsType(WorkDefinition))
-						 -> forAll (w1, w2 : WorkDefinition | w1.name = w2.name implies w1 = w2)
-						 
+						-> collect(p : ProcessElement | p.oclAsType(WorkDefinition))
+						-> forAll(w1, w2 : WorkDefinition | w1.name = w2.name implies w1 = w2)
+						
 context WorkSequence
-inv nonReflexif('Dépendance réflexive'):
+inv nonReflexif(self.successor.name + ' a une dépendance réflexive'):
 	self.predecessor <> self.successor
-
+	
 context WorkDefinition
-inv nom2caracs('Nom avec moins de 2 caractères : ' + self.name):
+inv auMoins2Caractere(self.name + 'a au moins de 2 caractères.'):
 	self.name.size() >= 2
 
 context WorkDefinition
-inv nomValide('Nom invalide : ' + self.name):
-	self.name.matches('[A-Za-z_][A-za-z0-9_]*')
-
---
--- example invariant with a custom error message to verify that
--- the 'name' property of all 'simplepdl::Process' instances is non-null
---
-inv NonNull_name('The \'name\' property of "' + self.toString() + '" is null'):
-	name <> null
+inv nomValide(self.name + 'est un nom invalide'):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+	
+context Ressource
+inv nomValide(self.name + 'est un nom invalide'):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*') 
+	
+inv quantityNotNegative(self.name + 'a une une quantité négative de ressources'):
+	self.quantity >= 0
+	
+context UsefulRessource
+inv quantityNotNegative('On ne peut pas utiliser une une quantité négative ou nulle de ressources'):
+	self.usefulQuantity > 0
+	
 
 endpackage
