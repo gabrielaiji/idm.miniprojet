@@ -1,0 +1,43 @@
+module SimplePDL2PetriNet;
+create OUT: petrinet from  IN: simplepdl;
+
+-- Obtenir le processus qui contient ce process element.
+-- Remarque: Ce helper ne serait pas utile si une r�f�rence opposite
+-- avait �t� plac�e entre Process et ProcessElement
+helper context simplepdl!ProcessElement
+def: getProcess(): simplepdl!Process =
+	simplepdl!Process.allInstances()
+		->select(p | p.processElements->includes(self))
+		->asSequence()->first();
+
+-- Traduire un Process en un Petri de m�me nom
+rule Process2Petri {
+	from p: simplepdl!Process
+	to pn: petrinet!Petri (name <- p.name)
+}
+
+-- Traduire une WorkDefinition en un motif sur le r�seau de Petri
+rule WorkDefinition2PetriNet {
+	from wd: simplepdl!WorkDefinition
+	to
+		-- PLACES d'une WorkDefinition
+		p_ready: petrinet!Place(
+				name <- wd.name + '_ready',
+				nbTokens <- 1,
+				net <- wd.getProcess()),
+		
+		p_started: petrinet!Place(
+				name <- wd.name + '_started',
+				nbTokens <- 0,
+				net <- wd.getProcess()),
+				
+		p_running: petrinet!Place(
+				name <- wd.name + '_running',
+				nbTokens <- 0,
+				net <- wd.getProcess()),
+				
+		p_finished: petrinet!Place(
+				name <- wd.name + '_finished',
+				nbTokens <- 0,
+				net <- wd.getProcess())
+}

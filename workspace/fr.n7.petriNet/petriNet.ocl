@@ -1,6 +1,6 @@
 import 'PetriNet.ecore'
 
-package petriNet
+package petrinet
 
 context Arc
 inv nonReflexif(self.source.name + ' a une arc réflexive.'):
