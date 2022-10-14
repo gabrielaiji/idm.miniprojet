@@ -63,6 +63,12 @@ public class PlaceImpl extends NodeImpl implements Place {
 	protected EClass eStaticClass() {
 		return PetrinetPackage.Literals.PLACE;
 	}
+	
+	@Override
+	public String getName() {
+		return "(" + super.getName() + ")";
+	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
