@@ -22,10 +22,8 @@
       linksToPredecessors="//@processElements.4 //@processElements.5"
       name="RedactionDoc">
     <usefulRessources
-        usefulQuantity="1"
         ressource="//@processElements.11"/>
     <usefulRessources
-        usefulQuantity="1"
         ressource="//@processElements.12"/>
   </processElements>
   <processElements
@@ -48,7 +46,6 @@
         usefulQuantity="2"
         ressource="//@processElements.11"/>
     <usefulRessources
-        usefulQuantity="1"
         ressource="//@processElements.13"/>
   </processElements>
   <processElements
@@ -88,8 +85,7 @@
       quantity="4"/>
   <processElements
       xsi:type="simplepdl:Ressource"
-      name="redacteur"
-      quantity="1"/>
+      name="redacteur"/>
   <processElements
       xsi:type="simplepdl:Ressource"
       name="testeur"
