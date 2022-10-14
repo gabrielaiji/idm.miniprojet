@@ -54,7 +54,7 @@ public class RessourceImpl extends ProcessElementImpl implements Ressource {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int QUANTITY_EDEFAULT = 0;
+	protected static final int QUANTITY_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.

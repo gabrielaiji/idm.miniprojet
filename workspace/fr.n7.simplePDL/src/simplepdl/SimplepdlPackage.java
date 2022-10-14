@@ -371,13 +371,22 @@ public interface SimplepdlPackage extends EPackage {
 	int USEFUL_RESSOURCE__RESSOURCE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Associated Work Definition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Useful Ressource</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USEFUL_RESSOURCE_FEATURE_COUNT = 2;
+	int USEFUL_RESSOURCE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Useful Ressource</em>' class.
@@ -635,6 +644,17 @@ public interface SimplepdlPackage extends EPackage {
 	EReference getUsefulRessource_Ressource();
 
 	/**
+	 * Returns the meta object for the container reference '{@link simplepdl.UsefulRessource#getAssociatedWorkDefinition <em>Associated Work Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Associated Work Definition</em>'.
+	 * @see simplepdl.UsefulRessource#getAssociatedWorkDefinition()
+	 * @see #getUsefulRessource()
+	 * @generated
+	 */
+	EReference getUsefulRessource_AssociatedWorkDefinition();
+
+	/**
 	 * Returns the meta object for enum '{@link simplepdl.WorkSequenceType <em>Work Sequence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -856,6 +876,14 @@ public interface SimplepdlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USEFUL_RESSOURCE__RESSOURCE = eINSTANCE.getUsefulRessource_Ressource();
+
+		/**
+		 * The meta object literal for the '<em><b>Associated Work Definition</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION = eINSTANCE.getUsefulRessource_AssociatedWorkDefinition();
 
 		/**
 		 * The meta object literal for the '{@link simplepdl.WorkSequenceType <em>Work Sequence Type</em>}' enum.

@@ -4,15 +4,18 @@ package simplepdl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import simplepdl.Ressource;
 import simplepdl.SimplepdlPackage;
 import simplepdl.UsefulRessource;
+import simplepdl.WorkDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +27,7 @@ import simplepdl.UsefulRessource;
  * <ul>
  *   <li>{@link simplepdl.impl.UsefulRessourceImpl#getUsefulQuantity <em>Useful Quantity</em>}</li>
  *   <li>{@link simplepdl.impl.UsefulRessourceImpl#getRessource <em>Ressource</em>}</li>
+ *   <li>{@link simplepdl.impl.UsefulRessourceImpl#getAssociatedWorkDefinition <em>Associated Work Definition</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,7 +41,7 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int USEFUL_QUANTITY_EDEFAULT = 0;
+	protected static final int USEFUL_QUANTITY_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getUsefulQuantity() <em>Useful Quantity</em>}' attribute.
@@ -142,6 +146,91 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public WorkDefinition getAssociatedWorkDefinition() {
+		if (eContainerFeatureID() != SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION) return null;
+		return (WorkDefinition)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAssociatedWorkDefinition(WorkDefinition newAssociatedWorkDefinition, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newAssociatedWorkDefinition, SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAssociatedWorkDefinition(WorkDefinition newAssociatedWorkDefinition) {
+		if (newAssociatedWorkDefinition != eInternalContainer() || (eContainerFeatureID() != SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION && newAssociatedWorkDefinition != null)) {
+			if (EcoreUtil.isAncestor(this, newAssociatedWorkDefinition))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newAssociatedWorkDefinition != null)
+				msgs = ((InternalEObject)newAssociatedWorkDefinition).eInverseAdd(this, SimplepdlPackage.WORK_DEFINITION__USEFUL_RESSOURCES, WorkDefinition.class, msgs);
+			msgs = basicSetAssociatedWorkDefinition(newAssociatedWorkDefinition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION, newAssociatedWorkDefinition, newAssociatedWorkDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetAssociatedWorkDefinition((WorkDefinition)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				return basicSetAssociatedWorkDefinition(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				return eInternalContainer().eInverseRemove(this, SimplepdlPackage.WORK_DEFINITION__USEFUL_RESSOURCES, WorkDefinition.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -150,6 +239,8 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 			case SimplepdlPackage.USEFUL_RESSOURCE__RESSOURCE:
 				if (resolve) return getRessource();
 				return basicGetRessource();
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				return getAssociatedWorkDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -167,6 +258,9 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case SimplepdlPackage.USEFUL_RESSOURCE__RESSOURCE:
 				setRessource((Ressource)newValue);
+				return;
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				setAssociatedWorkDefinition((WorkDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -186,6 +280,9 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 			case SimplepdlPackage.USEFUL_RESSOURCE__RESSOURCE:
 				setRessource((Ressource)null);
 				return;
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				setAssociatedWorkDefinition((WorkDefinition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -202,6 +299,8 @@ public class UsefulRessourceImpl extends MinimalEObjectImpl.Container implements
 				return usefulQuantity != USEFUL_QUANTITY_EDEFAULT;
 			case SimplepdlPackage.USEFUL_RESSOURCE__RESSOURCE:
 				return ressource != null;
+			case SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION:
+				return getAssociatedWorkDefinition() != null;
 		}
 		return super.eIsSet(featureID);
 	}

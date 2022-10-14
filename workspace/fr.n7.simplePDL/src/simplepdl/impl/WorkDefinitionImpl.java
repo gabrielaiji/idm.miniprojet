@@ -13,8 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -161,7 +160,7 @@ public class WorkDefinitionImpl extends ProcessElementImpl implements WorkDefini
 	 */
 	public EList<UsefulRessource> getUsefulRessources() {
 		if (usefulRessources == null) {
-			usefulRessources = new EObjectContainmentEList<UsefulRessource>(UsefulRessource.class, this, SimplepdlPackage.WORK_DEFINITION__USEFUL_RESSOURCES);
+			usefulRessources = new EObjectContainmentWithInverseEList<UsefulRessource>(UsefulRessource.class, this, SimplepdlPackage.WORK_DEFINITION__USEFUL_RESSOURCES, SimplepdlPackage.USEFUL_RESSOURCE__ASSOCIATED_WORK_DEFINITION);
 		}
 		return usefulRessources;
 	}
@@ -179,6 +178,8 @@ public class WorkDefinitionImpl extends ProcessElementImpl implements WorkDefini
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLinksToPredecessors()).basicAdd(otherEnd, msgs);
 			case SimplepdlPackage.WORK_DEFINITION__LINKS_TO_SUCCESSORS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLinksToSuccessors()).basicAdd(otherEnd, msgs);
+			case SimplepdlPackage.WORK_DEFINITION__USEFUL_RESSOURCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsefulRessources()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

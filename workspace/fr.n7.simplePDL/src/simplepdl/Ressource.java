@@ -45,12 +45,13 @@ public interface Ressource extends ProcessElement {
 
 	/**
 	 * Returns the value of the '<em><b>Quantity</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Quantity</em>' attribute.
 	 * @see #setQuantity(int)
 	 * @see simplepdl.SimplepdlPackage#getRessource_Quantity()
-	 * @model required="true"
+	 * @model default="1" required="true"
 	 * @generated
 	 */
 	int getQuantity();

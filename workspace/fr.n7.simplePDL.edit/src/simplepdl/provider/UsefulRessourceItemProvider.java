@@ -21,8 +21,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import simplepdl.Ressource;
 import simplepdl.SimplepdlPackage;
 import simplepdl.UsefulRessource;
 
@@ -131,12 +129,7 @@ public class UsefulRessourceItemProvider
 	@Override
 	public String getText(Object object) {
 		UsefulRessource usefulRessource = (UsefulRessource)object;
-		Ressource ressource = usefulRessource.getRessource();
-		String ressourceLabel = (ressource == null ? "?" : ressource.getName());
-		int quantity = usefulRessource.getUsefulQuantity();
-		
-		
-		return getString("_UI_UsefulRessource_type") + " Uses " + quantity +" " + ressourceLabel +"(s)";
+		return getString("_UI_UsefulRessource_type") + " " + usefulRessource.getUsefulQuantity();
 	}
 
 
