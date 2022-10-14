@@ -52,7 +52,7 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="simplepdl::UsefulRessource" referenceName="UsefulRessource"/>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="simplepdl::UsefulRessource"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
