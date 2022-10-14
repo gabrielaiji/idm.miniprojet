@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import petrinet.Arc;
+import petrinet.ArcType;
 import petrinet.PetrinetPackage;
 
 /**
@@ -161,7 +162,14 @@ public class ArcItemProvider extends PetriElementItemProvider {
 	@Override
 	public String getText(Object object) {
 		Arc arc = (Arc)object;
-		return getString("_UI_Arc_type") + " " + arc.getWeight();
+		ArcType arcType = arc.getArcType();
+		String label = "--" + (arcType == null ? "?" : arcType.toString()) + "-->";
+		String previous = arc.getSource() == null ? "?" : arc.getSource().getName();
+		
+		String next = arc.getTarget() == null ? "?" : arc.getTarget().getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Arc_type") :
+			getString("_UI_Arc_type") + " " + previous + " " + label + " " + next;
 	}
 
 

@@ -114,10 +114,14 @@ public class RessourceItemProvider extends ProcessElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Ressource)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Ressource_type") :
-			getString("_UI_Ressource_type") + " " + label;
+		Ressource ressource = (Ressource) object;
+		String name = ressource.getName();
+		String label = (name == null || name.length() == 0 ? "?"
+							: ressource.getName());
+		int quantity = ressource.getQuantity();
+		
+		
+		return getString("_UI_Ressource_type")  + " " + label + " : stock of " + quantity;
 	}
 
 

@@ -33,5 +33,10 @@ public class TransitionImpl extends NodeImpl implements Transition {
 	protected EClass eStaticClass() {
 		return PetrinetPackage.Literals.TRANSITION;
 	}
+	
+	@Override
+	public String getName() {
+		return "[" + super.getName() + "]";
+	}
 
 } //TransitionImpl
