@@ -10,6 +10,11 @@ inv withMessage('Explicit message in process ' + self.name + ' (withMessage)'): 
 context Process
 inv validName('Invalid name: ' + self.name):
 	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+	
+inv UniqueNames ('duplicate names'):
+	self.processElements -> select(p : ProcessElement | p.oclIsKindOf(WorkDefinition))
+						-> collect(p : ProcessElement | p.oclAsType(WorkDefinition))
+						-> forAll(w1, w2 : WorkDefinition | w1.name = w2.name implies w1 = w2)
 
 context ProcessElement
 def: process(): Process =
@@ -24,5 +29,26 @@ inv successorAndPredecessorInSameProcess('Activities not in the same process : '
 ):
 	self.process() = self.successor.process()
 	and self.process() = self.predecessor.process()
+	
+inv nonReflexive(self.successor.name + ' a une dépendance réflexive'):
+	self.predecessor <> self.successor
+	
+context WorkDefinition
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+inv atLeast2Characters(self.name + 'less than 2 characters'):
+	self.name.size() >= 2
+	
+context Ressource
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*') 
+	
+inv quantityNotNegative(self.name + 'has a negative quantity of ressources'):
+	self.quantity >= 0
+	
+context UsefulRessource
+inv quantityNotNegative('A WD cannot use a negative or zero amount of ressources'):
+	self.usefulQuantity > 0
 
 endpackage
