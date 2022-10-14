@@ -1,6 +1,7 @@
 package simplepdl.manip;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
@@ -13,8 +14,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import petrinet.PetrinetPackage;
 import petrinet.Petri;
 import petrinet.PetrinetFactory;
-
+import simplepdl.Guidance;
 import simplepdl.Process;
+import simplepdl.ProcessElement;
+import simplepdl.Ressource;
 import simplepdl.WorkDefinition;
 import simplepdl.WorkSequence;
 import simplepdl.WorkSequenceType;
@@ -56,12 +59,29 @@ public class SimplePDLToPetriNet {
 		petri.setName(process.getName());
 		
 		
+		ArrayList<WorkDefinition> wdLst = new ArrayList<WorkDefinition>();
+		ArrayList<WorkSequence> wsLst = new ArrayList<WorkSequence>();
+		ArrayList<Guidance> gLst = new ArrayList<Guidance>();
+		ArrayList<Ressource> resLst = new ArrayList<Ressource>();
+		
 		//Integer nbPE = process.getProcessElements().size();
 		
 		for (Object o : process.getProcessElements()) {
 			if (o instanceof WorkDefinition) {
 				WorkDefinition wd = (WorkDefinition) o;
-				//TODO
+				wdLst.add(wd);
+			}
+			else if(o instanceof WorkSequence) {
+				WorkSequence ws = (WorkSequence) o;
+				wsLst.add(ws);
+			}
+			else if(o instanceof Guidance) {
+				Guidance gui = (Guidance) o;
+				gLst.add(gui);
+			}
+			else if(o instanceof Ressource) {
+				Ressource res = (Ressource) o;
+				resLst.add(res);
 			}
 		}
 			    
