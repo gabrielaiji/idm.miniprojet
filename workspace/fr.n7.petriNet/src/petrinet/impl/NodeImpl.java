@@ -104,6 +104,10 @@ public class NodeImpl extends PetriElementImpl implements Node {
 	public String getName() {
 		return name;
 	}
+	
+	public String getNameWithFrame() {
+		return name;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
