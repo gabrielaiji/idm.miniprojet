@@ -35,6 +35,8 @@ public interface Node extends PetriElement {
 	 */
 	String getName();
 
+	String getNameWithFrame();
+	
 	/**
 	 * Sets the value of the '{@link petrinet.Node#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

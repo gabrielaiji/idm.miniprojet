@@ -137,7 +137,7 @@ public class NodeItemProvider extends PetriElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Node)object).getName();
+		String label = ((Node)object).getNameWithFrame();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Node_type") :
 			getString("_UI_Node_type") + " " + label;

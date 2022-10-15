@@ -65,7 +65,7 @@ public class PlaceImpl extends NodeImpl implements Place {
 	}
 	
 	@Override
-	public String getName() {
+	public String getNameWithFrame() {
 		return "(" + super.getName() + ")";
 	}
 

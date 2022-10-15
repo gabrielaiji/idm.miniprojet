@@ -35,7 +35,7 @@ public class TransitionImpl extends NodeImpl implements Transition {
 	}
 	
 	@Override
-	public String getName() {
+	public String getNameWithFrame() {
 		return "[" + super.getName() + "]";
 	}
 

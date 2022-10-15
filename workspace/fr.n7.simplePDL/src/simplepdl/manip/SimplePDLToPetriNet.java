@@ -51,10 +51,10 @@ public class SimplePDLToPetriNet {
 		ResourceSet petriResSet = new ResourceSetImpl();
 
 		// Definir les ressources (la source simplePDL et target petriNet)
-		URI simplePDLModelURI = URI.createURI("models/PetriNetCreated_from_SimplePDL.xmi");
+		URI simplePDLModelURI = URI.createURI("developpementAvecRessources.xmi");
 		Resource simpRessource = simpResSet.getResource(simplePDLModelURI, true);
 		
-		URI petriNetmodelURI = URI.createURI("models/PetriNetCreated_from_SimplePDL.xmi");
+		URI petriNetmodelURI = URI.createURI("models/PetriNetCreated_2_SimplePDL_by_java.xmi");
 		Resource petriResource = petriResSet.createResource(petriNetmodelURI);
 				
 		// La fabrique pour fabriquer les elements de SimplePDL
@@ -64,6 +64,7 @@ public class SimplePDLToPetriNet {
 		Process process = (Process) simpRessource.getContents().get(0);
 		Petri petri = myFactory.createPetri();
 		petri.setName(process.getName());
+		petriResource.getContents().add(petri);
 		
 		
 		//Associe à un nom d'un WD, un tableau des places associées au WD
@@ -176,7 +177,7 @@ public class SimplePDLToPetriNet {
 		Transition finish = createTransition(myFactory, petri, "Finish " + wdName);
 		
 		//ARCS
-		createArc(myFactory, petri,aIdle, start);
+		createArc(myFactory, petri, aIdle, start);
 		createArc(myFactory, petri, start, aRunning);
 		createArc(myFactory, petri, start, aHasStarted);
 		createArc(myFactory, petri, aRunning, finish);
@@ -184,21 +185,23 @@ public class SimplePDLToPetriNet {
 		
 		//Ressources
 		EList<UsefulRessource> lst = wd.getUsefulRessources();
-		for(UsefulRessource useRes : lst) {
-			Place resPlace = resMap.get(useRes.getRessource().getName());
-			
-			Arc useRessource = createArc(myFactory, petri, resPlace, start);
-			useRessource.setWeight(useRes.getUsefulQuantity());
-			
-			Arc returnRessource = createArc(myFactory, petri, finish, resPlace);
-			returnRessource.setWeight(useRes.getUsefulQuantity());
+		if(!lst.isEmpty()){
+			for(UsefulRessource useRes : lst) {
+				Place resPlace = resMap.get(useRes.getRessource().getName());
+				
+				Arc useRessource = createArc(myFactory, petri, resPlace, start);
+				useRessource.setWeight(useRes.getUsefulQuantity());
+				
+				Arc returnRessource = createArc(myFactory, petri, finish, resPlace);
+				returnRessource.setWeight(useRes.getUsefulQuantity());
+			}
 		}
 		
 		Node[] nodes = {aIdle, aRunning, aFinished, aHasStarted, start, finish};
 		wdMap.put(wdName, nodes);
 	}
 	
-	private static Place createPlace(PetrinetFactory myFactory, Petri petri,String name, int nbTokens){
+	private static Place createPlace(PetrinetFactory myFactory, Petri petri, String name, int nbTokens){
 		Place place = myFactory.createPlace();
 		place.setName(name);
 		place.setNbTokens(nbTokens);
