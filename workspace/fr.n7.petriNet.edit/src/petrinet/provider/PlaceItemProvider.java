@@ -91,7 +91,7 @@ public class PlaceItemProvider extends NodeItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Place)object).getName();
+		String label = ((Place)object).getNameWithFrame();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Place_type") :
 			getString("_UI_Place_type") + " " + label;

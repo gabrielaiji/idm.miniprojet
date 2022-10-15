@@ -34,7 +34,7 @@ public interface Node extends PetriElement {
 	 * @generated
 	 */
 	String getName();
-
+	
 	String getNameWithFrame();
 	
 	/**

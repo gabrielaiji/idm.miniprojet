@@ -64,7 +64,7 @@ public class TransitionItemProvider extends NodeItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Transition)object).getName();
+		String label = ((Transition)object).getNameWithFrame();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Transition_type") :
 			getString("_UI_Transition_type") + " " + label;

@@ -83,7 +83,6 @@ public class SimplePDLToPetriNet {
 		ArrayList<WorkSequence> wsLst = new ArrayList<WorkSequence>();
 		ArrayList<Guidance> gLst = new ArrayList<Guidance>();
 		
-		//Integer nbPE = process.getProcessElements().size();
 		
 		for (ProcessElement element : process.getProcessElements()) {
 			if (element instanceof WorkDefinition) {
@@ -185,16 +184,14 @@ public class SimplePDLToPetriNet {
 		
 		//Ressources
 		EList<UsefulRessource> lst = wd.getUsefulRessources();
-		if(!lst.isEmpty()){
-			for(UsefulRessource useRes : lst) {
-				Place resPlace = resMap.get(useRes.getRessource().getName());
+		for(UsefulRessource useRes : lst) {
+			Place resPlace = resMap.get(useRes.getRessource().getName());
 				
-				Arc useRessource = createArc(myFactory, petri, resPlace, start);
-				useRessource.setWeight(useRes.getUsefulQuantity());
+			Arc useRessource = createArc(myFactory, petri, resPlace, start);
+			useRessource.setWeight(useRes.getUsefulQuantity());
 				
-				Arc returnRessource = createArc(myFactory, petri, finish, resPlace);
-				returnRessource.setWeight(useRes.getUsefulQuantity());
-			}
+			Arc returnRessource = createArc(myFactory, petri, finish, resPlace);
+			returnRessource.setWeight(useRes.getUsefulQuantity());
 		}
 		
 		Node[] nodes = {aIdle, aRunning, aFinished, aHasStarted, start, finish};
