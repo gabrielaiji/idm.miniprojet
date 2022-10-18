@@ -163,16 +163,21 @@ public class ArcItemProvider extends PetriElementItemProvider {
 	public String getText(Object object) {
 		Arc arc = (Arc)object;
 		ArcType arcType = arc.getArcType();
-		String label = "------>";
+		String labelStart = "---";
 		if(arcType == ArcType.READ_ARC) {
-			label = "O------>";
+			labelStart = "O---";
+		}
+		String labelEnd = "--->";
+		String labelMiddle = "-";
+		if(arc.getWeight() > 1) {
+			labelMiddle = Integer.toString(arc.getWeight());
 		}
 		
+		String label = labelStart + labelMiddle + labelEnd;
 		String previous = arc.getSource() == null ? "?" : arc.getSource().getNameWithFrame();
 		
 		String next = arc.getTarget() == null ? "?" : arc.getTarget().getNameWithFrame();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Arc_type") :
+		return 
 			getString("_UI_Arc_type") + " " + previous + " " + label + " " + next;
 	}
 
