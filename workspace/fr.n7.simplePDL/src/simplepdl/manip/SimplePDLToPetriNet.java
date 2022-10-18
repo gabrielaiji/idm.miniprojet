@@ -172,8 +172,8 @@ public class SimplePDLToPetriNet {
 		Place aHasStarted = createPlace(myFactory, petri, wdName + "_Has_Started", 0);
 		
 		//TRANSITIONS
-		Transition start = createTransition(myFactory, petri, "Start " + wdName);
-		Transition finish = createTransition(myFactory, petri, "Finish " + wdName);
+		Transition start = createTransition(myFactory, petri, "Start_" + wdName);
+		Transition finish = createTransition(myFactory, petri, "Finish_" + wdName);
 		
 		//ARCS
 		createArc(myFactory, petri, aIdle, start);

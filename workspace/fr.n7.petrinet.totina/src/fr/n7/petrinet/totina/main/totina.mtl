@@ -10,20 +10,14 @@ petri [aPetri.name/]
 
 [let places : OrderedSet(Place) = aPetri.getPlaces() ]
 	[for (place : Place | places)]
-		pl [place.name/] ([place.nbTokens/])
+pl [place.name/] ([place.nbTokens/])
 	[/for]
 
 [/let]
 
 [let transitions : OrderedSet(Transition) = aPetri.getTransitions()]
 	[for (tr : Transition | transitions)]
-	tr [tr.name/] 
-		[let arcs : OrderedSet(Arc) = tr.getIncomingArcs()]
-			[for (arc : Arc |arcs)] [arc.source.name/][if arc.arcType = ArcType::normalArc]*[elseif arc.arcType = ArcType::readArc]?[/if][arc.weight/] [/for]
-		[/let]
-		->
-		[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()]
-			[for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
+tr [tr.name/][let arcs : OrderedSet(Arc) = tr.getIncomingArcs()][for (arc : Arc |arcs)] [arc.source.name/][if arc.arcType = ArcType::normalArc]*[elseif arc.arcType = ArcType::readArc]?[/if][arc.weight/] [/for][/let]->[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()][for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
 		[/let]
 	[/for]
 [/let]
