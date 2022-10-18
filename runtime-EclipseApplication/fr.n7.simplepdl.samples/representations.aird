@@ -4,7 +4,7 @@
     <semanticResources>developpementAvecRessources.simplepdl</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_wVJ1IEe2Ee2K6KHASedASQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/resource/fr.n7.simplepdl.design/description/simplepdl.odesign#//@ownedViewpoints[name='simplepdlViewpoint']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_4PKFAke7Ee2K6KHASedASQ" name="new ProcessDiagram" repPath="#_4PKFAEe7Ee2K6KHASedASQ" changeId="de7e9b4d-d4a9-4ab8-b2a8-31631a15d2c8">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_4PKFAke7Ee2K6KHASedASQ" name="new ProcessDiagram" repPath="#_4PKFAEe7Ee2K6KHASedASQ" changeId="234b059d-a759-4616-af58-e0e4ece39b7d">
         <description xmi:type="description_1:DiagramDescription" href="platform:/resource/fr.n7.simplepdl.design/description/simplepdl.odesign#//@ownedViewpoints[name='simplepdlViewpoint']/@ownedRepresentations[name='ProcessDiagram']"/>
         <target xmi:type="simplepdl:Process" href="developpementAvecRessources.simplepdl#/"/>
       </ownedRepresentationDescriptors>
