@@ -4,7 +4,7 @@
 
 [template public petriToTina(aPetri : Petri)]
 [comment @main/]
-[file (aPetri.name + 'net', false, 'UTF-8')]
+[file (aPetri.name + '.net', false, 'UTF-8')]
 
 petri [aPetri.name/]
 
@@ -19,9 +19,9 @@ petri [aPetri.name/]
 	[for (tr : Transition | transitions)]
 	tr [tr.name/] 
 		[let arcs : OrderedSet(Arc) = tr.getIncomingArcs()]
-			[for (arc : Arc |arcs)] [arc.source.name/]*[arc.weight/] [/for]
+			[for (arc : Arc |arcs)] [arc.source.name/][if arc.arcType = ArcType::normalArc]*[elseif arc.arcType = ArcType::readArc]?[/if][arc.weight/] [/for]
 		[/let]
-		->zeffvsg
+		->
 		[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()]
 			[for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
 		[/let]
@@ -51,3 +51,4 @@ t.outgoingArcs->asOrderedSet()
 [query public getIncomingArcs(t : Transition): OrderedSet(Arc) =
 t.incomingArcs->asOrderedSet()
 /]
+

@@ -54,7 +54,7 @@ public class SimplePDLToPetriNet {
 		URI simplePDLModelURI = URI.createURI("developpementAvecRessources.xmi");
 		Resource simpRessource = simpResSet.getResource(simplePDLModelURI, true);
 		
-		URI petriNetmodelURI = URI.createURI("models/PetriNetCreated_2_SimplePDL_by_java.xmi");
+		URI petriNetmodelURI = URI.createURI("models/PetriNetCreated_from_SimplePDL_by_java.xmi");
 		Resource petriResource = petriResSet.createResource(petriNetmodelURI);
 				
 		// La fabrique pour fabriquer les elements de SimplePDL
