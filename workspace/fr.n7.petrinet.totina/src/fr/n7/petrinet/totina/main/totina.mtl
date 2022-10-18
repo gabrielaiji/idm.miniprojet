@@ -21,7 +21,7 @@ petri [aPetri.name/]
 		[let arcs : OrderedSet(Arc) = tr.getIncomingArcs()]
 			[for (arc : Arc |arcs)] [arc.source.name/]*[arc.weight/] [/for]
 		[/let]
-		->
+		->zeffvsg
 		[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()]
 			[for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
 		[/let]
