@@ -1,0 +1,53 @@
+[comment encoding = UTF-8 /]
+[module totina('http://petrinet')]
+
+
+[template public petriToTina(aPetri : Petri)]
+[comment @main/]
+[file (aPetri.name + 'net', false, 'UTF-8')]
+
+petri [aPetri.name/]
+
+[let places : OrderedSet(Place) = aPetri.getPlaces() ]
+	[for (place : Place | places)]
+		pl [place.name/] ([place.nbTokens/])
+	[/for]
+
+[/let]
+
+[let transitions : OrderedSet(Transition) = aPetri.getTransitions()]
+	[for (tr : Transition | transitions)]
+	tr [tr.name/] 
+		[let arcs : OrderedSet(Arc) = tr.getIncomingArcs()]
+			[for (arc : Arc |arcs)] [arc.source.name/]*[arc.weight/] [/for]
+		[/let]
+		->
+		[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()]
+			[for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
+		[/let]
+	[/for]
+[/let]
+
+
+[/file]
+[/template]
+
+[query public getPlaces(p: Petri) : OrderedSet(Place) =
+p.petriElements->select( e | e.oclIsTypeOf(Place) )
+->collect( e | e.oclAsType(Place) )
+->asOrderedSet()
+/]
+
+[query public getTransitions(p: Petri) : OrderedSet(Transition) =
+p.petriElements->select( e | e.oclIsTypeOf(Transition) )
+->collect( e | e.oclAsType(Transition) )
+->asOrderedSet()
+/]
+
+[query public getOutgoingArcs(t : Transition): OrderedSet(Arc) =
+t.outgoingArcs->asOrderedSet()
+/]
+
+[query public getIncomingArcs(t : Transition): OrderedSet(Arc) =
+t.incomingArcs->asOrderedSet()
+/]
