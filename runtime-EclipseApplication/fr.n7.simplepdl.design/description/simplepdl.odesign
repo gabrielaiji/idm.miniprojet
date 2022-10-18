@@ -80,9 +80,8 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[self.eContainer()/]">
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="simplepdl::UsefulRessource" referenceName="usefulRessources">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="associatedWorkDefinition" valueExpression="[source/]"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="ressource" valueExpression="[target/]"/>
                 </subModelOperations>
               </firstModelOperations>
