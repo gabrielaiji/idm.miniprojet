@@ -39,5 +39,51 @@ rule WorkDefinition2PetriNet {
 		p_finished: petrinet!Place(
 				name <- wd.name + '_finished',
 				nbTokens <- 0,
-				net <- wd.getProcess())
+				net <- wd.getProcess()),
+				
+		-- TRANSITIONS d'une WorkDefinition
+		p_start: petrinet!Transition(
+				name <- wd.name + '_start',
+				net <- wd.getProcess()),
+				
+		p_finish: petrinet!Transition(
+				name <- wd.name + '_finish',
+				net <- wd.getProcess()),
+				
+		-- ARCS d'une WorkDefinition
+		p_ready2start: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_ready,
+				target <- p_start,
+				weight <- 1),
+				
+		p_start2started: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_start,
+				target <- p_started,
+				weight <- 1),
+				
+		p_start2running: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_start,
+				target <- p_running,
+				weight <- 1),
+				
+		p_running2finish: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_running,
+				target <- p_finish,
+				weight <- 1),
+				
+		p_finish2finished: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_finish,
+				target <- p_finished,
+				weight <- 1)
+
 }
