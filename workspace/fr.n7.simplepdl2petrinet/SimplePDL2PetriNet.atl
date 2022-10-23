@@ -85,5 +85,54 @@ rule WorkDefinition2PetriNet {
 				source <- p_finish,
 				target <- p_finished,
 				weight <- 1)
+}
 
+-- Traduire une WorkSequence en un motif sur le r�seau de Petri
+rule WorkSequence2PetriNet {
+	from ws: simplepdl!WorkSequence
+	to
+		-- ARC d'une WorkSequence
+		p_worksequence: petrinet!Arc(
+				arcType <- #readArc,
+				net <- ws.getProcess(),
+				source <- thisModule.resolveTemp(ws.predecessor, if (ws.linkType = #startToStart or ws.linkType = #startToFinish)
+																 then 'p_started'
+																 else 'p_finished'
+																 endif),
+				target <- thisModule.resolveTemp(ws.successor, if (ws.linkType = #startToStart or ws.linkType = #finishToStart)
+															   then 'p_start'
+															   else 'p_finish'
+															   endif),
+				weight <- 1)
+}
+
+-- Traduire une Ressource en un motif sur le r�seau de Petri
+rule Ressource2PetriNet {
+	from r: simplepdl!Ressource
+	to
+		-- PLACE d'une Ressource
+		p_ressource: petrinet!Place(
+				name <- r.name,
+				nbTokens <- r.quantity,
+				net <- r.getProcess())
+}
+
+-- Traduire une UsefulRessource en un motif sur le r�seau de Petri
+rule UsefulRessource2PetriNet {
+	from ur: simplepdl!UsefulRessource
+	to
+		-- ARCS d'une UsefulRessource
+		p_ressource2start: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- ur.associatedWorkDefinition.getProcess(),
+				source <- thisModule.resolveTemp(ur.ressource, 'p_ressource'),
+				target <- thisModule.resolveTemp(ur.associatedWorkDefinition, 'p_start'),
+				weight <- ur.usefulQuantity),
+				
+		p_finish2ressource: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- ur.associatedWorkDefinition.getProcess(),
+				source <- thisModule.resolveTemp(ur.associatedWorkDefinition, 'p_finish'),
+				target <- thisModule.resolveTemp(ur.ressource, 'p_ressource'),
+				weight <- ur.usefulQuantity)
 }
