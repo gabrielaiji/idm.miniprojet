@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="totina" name="fr.n7.petrinet.totina">
-    <property name="ECLIPSE_HOME" value="../../../../../Bureau/eclipse-modeling-2022-09-R-linux-gtk-x86_64/eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../../../../Applis/eclipse-modeling-2022-09-R-linux-gtk-x86_64/eclipse"/>
     <property name="ECLIPSE_WORKSPACE" value="../.."/>
 
     <!-- The classpath with only the dependencies used by the project -->
