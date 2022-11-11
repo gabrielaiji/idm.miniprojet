@@ -15,7 +15,7 @@ pl [place.name/] ([place.nbTokens/])
 
 [let transitions : OrderedSet(Transition) = aPetri.getTransitions()]
 	[for (tr : Transition | transitions)]
-tr [tr.name/][let arcs : OrderedSet(Arc) = tr.getIncomingArcs()][for (arc : Arc |arcs)] [arc.source.name/][if arc.arcType = ArcType::normalArc]*[elseif arc.arcType = ArcType::readArc]?[/if][arc.weight/] [/for][/let]->[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()][for (arc : Arc |arcs)] [arc.target.name/]*[arc.weight/] [/for]
+tr [tr.name/][let arcs : OrderedSet(Arc) = tr.getIncomingArcs()][for (arc : Arc |arcs)] [arc.source.name/][if arc.arcType = ArcType::normalArc]*[elseif arc.arcType = ArcType::readArc]?[/if][if arc.weight = 0]1[else][arc.weight/][/if] [/for][/let]->[let arcs : OrderedSet(Arc) = tr.getOutgoingArcs()][for (arc : Arc |arcs)] [arc.target.name/]*[if arc.weight = 0]1[else][arc.weight/][/if] [/for]
 		[/let]
 	[/for]
 [/let]

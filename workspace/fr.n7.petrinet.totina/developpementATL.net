@@ -22,13 +22,13 @@ pl redacteur (1)
 pl testeur (2)
 
 
-tr Start_Conception Conception_Idle*0  concepteur*2  machine*2 -> Conception_Started*0  Conception_Running*0 
-tr Finish_Conception Conception_Running*0 -> Conception_Finished*0  concepteur*2  machine*2 
-tr Start_RedactionDoc RedactionDoc_Idle*0  Conception_Started?0  machine*0  redacteur*0 -> RedactionDoc_Started*0  RedactionDoc_Running*0 
-tr Finish_RedactionDoc RedactionDoc_Running*0  Conception_Finished?0 -> RedactionDoc_Finished*0  machine*0  redacteur*0 
-tr Start_Programmation Programmation_Idle*0  Conception_Finished?0  developpeur*2  machine*3 -> Programmation_Started*0  Programmation_Running*0 
-tr Finish_Programmation Programmation_Running*0 -> Programmation_Finished*0  developpeur*2  machine*3 
-tr Start_RedactionTests RedactionTests_Idle*0  Conception_Started?0  machine*2  testeur*0 -> RedactionTests_Started*0  RedactionTests_Running*0 
-tr Finish_RedactionTests RedactionTests_Running*0  Programmation_Finished?0 -> RedactionTests_Finished*0  machine*2  testeur*0 
+tr Start_Conception Conception_Idle*1  concepteur*2  machine*2 -> Conception_Started*1  Conception_Running*1 
+tr Finish_Conception Conception_Running*1 -> Conception_Finished*1  concepteur*2  machine*2 
+tr Start_RedactionDoc RedactionDoc_Idle*1  Conception_Started?1  machine*1  redacteur*1 -> RedactionDoc_Started*1  RedactionDoc_Running*1 
+tr Finish_RedactionDoc RedactionDoc_Running*1  Conception_Finished?1 -> RedactionDoc_Finished*1  machine*1  redacteur*1 
+tr Start_Programmation Programmation_Idle*1  Conception_Finished?1  developpeur*2  machine*3 -> Programmation_Started*1  Programmation_Running*1 
+tr Finish_Programmation Programmation_Running*1 -> Programmation_Finished*1  developpeur*2  machine*3 
+tr Start_RedactionTests RedactionTests_Idle*1  Conception_Started?1  machine*2  testeur*1 -> RedactionTests_Started*1  RedactionTests_Running*1 
+tr Finish_RedactionTests RedactionTests_Running*1  Programmation_Finished?1 -> RedactionTests_Finished*1  machine*2  testeur*1 
 
 
