@@ -4,9 +4,7 @@
 
 [template public petriToTina(aPetri : Petri)]
 [comment @main/]
-[file (aPetri.name + '.net', false, 'UTF-8')]
-
-petri [aPetri.name/]
+[file (aPetri.name + 'ATL.net', false, 'UTF-8')]
 
 [let places : OrderedSet(Place) = aPetri.getPlaces() ]
 	[for (place : Place | places)]

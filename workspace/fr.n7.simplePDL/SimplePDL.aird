@@ -9,7 +9,7 @@
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="SimplePDL.ecore#/"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Mr6TwF97Ee2d-fHPukh-jQ" name="simplepdl class diagram" repPath="#_MrXhMF97Ee2d-fHPukh-jQ" changeId="84ddc7a9-4299-4d41-a0b2-cc9cf43476ca">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Mr6TwF97Ee2d-fHPukh-jQ" name="simplepdl class diagram" repPath="#_MrXhMF97Ee2d-fHPukh-jQ" changeId="2b4d08a9-6684-4db8-906a-1ef5b6a8e7c3">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="SimplePDL.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1178,6 +1178,7 @@
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_ONQxw197Ee2d-fHPukh-jQ" description="_ONQxwF97Ee2d-fHPukh-jQ" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_ONQxxV97Ee2d-fHPukh-jQ" showIcon="false">
           <customFeatures>labelSize</customFeatures>
+          <labelFormat>bold</labelFormat>
         </centerLabelStyle>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_ONQxxF97Ee2d-fHPukh-jQ" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>

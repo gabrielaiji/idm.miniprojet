@@ -54,7 +54,7 @@ public class SimplePDLToPetriNet {
 		URI simplePDLModelURI = URI.createURI("developpementAvecRessources.xmi");
 		Resource simpRessource = simpResSet.getResource(simplePDLModelURI, true);
 		
-		URI petriNetmodelURI = URI.createURI("models/PetriNetCreated_from_SimplePDL_by_java.xmi");
+		URI petriNetmodelURI = URI.createURI("models/petriDeveloppementWithJava.xmi");
 		Resource petriResource = petriResSet.createResource(petriNetmodelURI);
 				
 		// La fabrique pour fabriquer les elements de SimplePDL
@@ -169,7 +169,7 @@ public class SimplePDLToPetriNet {
 		Place aIdle = createPlace(myFactory, petri, wdName + "_Idle", 1);
 		Place aRunning = createPlace(myFactory, petri, wdName + "_Running", 0);
 		Place aFinished = createPlace(myFactory, petri, wdName + "_Finished", 0);
-		Place aHasStarted = createPlace(myFactory, petri, wdName + "_Has_Started", 0);
+		Place aStarted = createPlace(myFactory, petri, wdName + "_Started", 0);
 		
 		//TRANSITIONS
 		Transition start = createTransition(myFactory, petri, "Start_" + wdName);
@@ -178,7 +178,7 @@ public class SimplePDLToPetriNet {
 		//ARCS
 		createArc(myFactory, petri, aIdle, start);
 		createArc(myFactory, petri, start, aRunning);
-		createArc(myFactory, petri, start, aHasStarted);
+		createArc(myFactory, petri, start, aStarted);
 		createArc(myFactory, petri, aRunning, finish);
 		createArc(myFactory, petri, finish, aFinished);
 		
@@ -194,7 +194,7 @@ public class SimplePDLToPetriNet {
 			returnRessource.setWeight(useRes.getUsefulQuantity());
 		}
 		
-		Node[] nodes = {aIdle, aRunning, aFinished, aHasStarted, start, finish};
+		Node[] nodes = {aIdle, aRunning, aFinished, aStarted, start, finish};
 		wdMap.put(wdName, nodes);
 	}
 	

@@ -1,0 +1,46 @@
+
+[] ( Conception_Idle \/Conception_Running \/ Conception_Finished );
+- [] ( Conception_Idle /\ Conception_Running );
+- [] ( Conception_Idle /\ Conception_Finished );
+- [] ( Conception_Finished /\ Conception_Running );
+[] ( Conception_Finished => [] Conception_Finished);
+[] ( Conception_Running => [] Conception_Started);
+
+[] ( RedactionDoc_Idle \/RedactionDoc_Running \/ RedactionDoc_Finished );
+- [] ( RedactionDoc_Idle /\ RedactionDoc_Running );
+- [] ( RedactionDoc_Idle /\ RedactionDoc_Finished );
+- [] ( RedactionDoc_Finished /\ RedactionDoc_Running );
+[] ( RedactionDoc_Finished => [] RedactionDoc_Finished);
+[] ( RedactionDoc_Running => [] RedactionDoc_Started);
+
+[] ( Programmation_Idle \/Programmation_Running \/ Programmation_Finished );
+- [] ( Programmation_Idle /\ Programmation_Running );
+- [] ( Programmation_Idle /\ Programmation_Finished );
+- [] ( Programmation_Finished /\ Programmation_Running );
+[] ( Programmation_Finished => [] Programmation_Finished);
+[] ( Programmation_Running => [] Programmation_Started);
+
+[] ( RedactionTests_Idle \/RedactionTests_Running \/ RedactionTests_Finished );
+- [] ( RedactionTests_Idle /\ RedactionTests_Running );
+- [] ( RedactionTests_Idle /\ RedactionTests_Finished );
+- [] ( RedactionTests_Finished /\ RedactionTests_Running );
+[] ( RedactionTests_Finished => [] RedactionTests_Finished);
+[] ( RedactionTests_Running => [] RedactionTests_Started);
+
+
+
+- Conception_Finished => - RedactionDoc_Finished ;
+
+
+- Conception_Started => RedactionDoc_Idle ;
+
+
+- Conception_Finished => Programmation_Idle ;
+
+
+- Conception_Started => RedactionTests_Idle ;
+
+
+- Programmation_Finished => - RedactionTests_Finished ;
+
+

@@ -21,40 +21,40 @@ rule WorkDefinition2PetriNet {
 	from wd: simplepdl!WorkDefinition
 	to
 		-- PLACES d'une WorkDefinition
-		p_ready: petrinet!Place(
-				name <- wd.name + '_ready',
+		p_idle: petrinet!Place(
+				name <- wd.name + '_Idle',
 				nbTokens <- 1,
 				net <- wd.getProcess()),
 		
 		p_started: petrinet!Place(
-				name <- wd.name + '_started',
+				name <- wd.name + '_Started',
 				nbTokens <- 0,
 				net <- wd.getProcess()),
 				
 		p_running: petrinet!Place(
-				name <- wd.name + '_running',
+				name <- wd.name + '_Running',
 				nbTokens <- 0,
 				net <- wd.getProcess()),
 				
 		p_finished: petrinet!Place(
-				name <- wd.name + '_finished',
+				name <- wd.name + '_Finished',
 				nbTokens <- 0,
 				net <- wd.getProcess()),
 				
 		-- TRANSITIONS d'une WorkDefinition
 		p_start: petrinet!Transition(
-				name <- wd.name + '_start',
+				name <- 'Start_' + wd.name,
 				net <- wd.getProcess()),
 				
 		p_finish: petrinet!Transition(
-				name <- wd.name + '_finish',
+				name <-  'Finish_' + wd.name,
 				net <- wd.getProcess()),
 				
 		-- ARCS d'une WorkDefinition
 		p_ready2start: petrinet!Arc(
 				arcType <- #normalArc,
 				net <- wd.getProcess(),
-				source <- p_ready,
+				source <- p_idle,
 				target <- p_start,
 				weight <- 1),
 				
