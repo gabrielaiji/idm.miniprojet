@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<petriNet:Petri
+<petrinet:Petri
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:petriNet="http://petrinet"
+    xmlns:petrinet="http://petrinet"
     xsi:schemaLocation="http://petrinet PetriNet.ecore"
     name="quatreSaisons">
   <petriElements
-      xsi:type="petriNet:Place"
+      xsi:type="petrinet:Place"
       name="hiver"
       outgoingArcs="//@petriElements.8"
       incomingArcs="//@petriElements.15"
       nbTokens="1"/>
   <petriElements
-      xsi:type="petriNet:Place"
+      xsi:type="petrinet:Place"
       name="printemps"
       outgoingArcs="//@petriElements.10"
       incomingArcs="//@petriElements.9"/>
   <petriElements
-      xsi:type="petriNet:Place"
+      xsi:type="petrinet:Place"
       name="ete"
       outgoingArcs="//@petriElements.12"
       incomingArcs="//@petriElements.11"/>
   <petriElements
-      xsi:type="petriNet:Place"
+      xsi:type="petrinet:Place"
       name="automne"
       outgoingArcs="//@petriElements.14"
       incomingArcs="//@petriElements.13"/>
   <petriElements
-      xsi:type="petriNet:Transition"
+      xsi:type="petrinet:Transition"
       name="h2p"
       outgoingArcs="//@petriElements.9"
       incomingArcs="//@petriElements.8"/>
   <petriElements
-      xsi:type="petriNet:Transition"
+      xsi:type="petrinet:Transition"
       name="p2e"
       outgoingArcs="//@petriElements.11"
       incomingArcs="//@petriElements.10"/>
   <petriElements
-      xsi:type="petriNet:Transition"
+      xsi:type="petrinet:Transition"
       name="e2a"
       outgoingArcs="//@petriElements.13"
       incomingArcs="//@petriElements.12"/>
   <petriElements
-      xsi:type="petriNet:Transition"
+      xsi:type="petrinet:Transition"
       name="a2h"
       outgoingArcs="//@petriElements.15"
       incomingArcs="//@petriElements.14"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.0"
-      target="//@petriElements.4"/>
+      target="//@petriElements.4"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.4"
-      target="//@petriElements.1"/>
+      target="//@petriElements.1"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.1"
-      target="//@petriElements.5"/>
+      target="//@petriElements.5"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.5"
-      target="//@petriElements.2"/>
+      target="//@petriElements.2"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.2"
-      target="//@petriElements.6"/>
+      target="//@petriElements.6"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.6"
-      target="//@petriElements.3"/>
+      target="//@petriElements.3"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.3"
-      target="//@petriElements.7"/>
+      target="//@petriElements.7"
+      arcType="normalArc"/>
   <petriElements
-      xsi:type="petriNet:Arc"
-      weight="1"
+      xsi:type="petrinet:Arc"
       source="//@petriElements.7"
-      target="//@petriElements.0"/>
-</petriNet:Petri>
+      target="//@petriElements.0"
+      arcType="normalArc"/>
+</petrinet:Petri>
