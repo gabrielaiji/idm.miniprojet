@@ -1,0 +1,66 @@
+import 'SimplePDL.ecore'
+
+package simplepdl
+
+
+context Process
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+	
+inv uniqueNamesActivities('Duplicate names for activities'):
+	self.processElements -> select(p : ProcessElement | p.oclIsKindOf(WorkDefinition))
+						-> collect(p : ProcessElement | p.oclAsType(WorkDefinition))
+						-> forAll(w1, w2 : WorkDefinition | w1.name = w2.name implies w1 = w2)
+
+inv uniqueNamesRessources('Duplicate names for ressources'):
+	self.processElements -> select(p : ProcessElement | p.oclIsKindOf(Ressource))
+						-> collect(p : ProcessElement | p.oclAsType(Ressource))
+						-> forAll(r1, r2 : Ressource | r1.name = r2.name implies r1 = r2)
+
+
+context ProcessElement
+def: process(): Process =
+	Process.allInstances()
+		->select(p | p.processElements->includes(self))
+		->asSequence()->first()
+
+
+context WorkSequence
+inv successorAndPredecessorInSameProcess('Activities not in the same process : '
+		+ self.predecessor.name + ' in ' + self.predecessor.process().name + ' and '
+		+ self.successor.name + ' in ' + self.successor.process().name):
+	self.process() = self.successor.process()
+	and self.process() = self.predecessor.process()
+	
+inv nonReflexive(self.successor.name + ' has a reflexive dependence'):
+	self.predecessor <> self.successor
+
+
+context WorkDefinition
+inv atLeast2Characters(self.name + ' is less than 2 characters'):
+	self.name.size() >= 2
+
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+inv dontUseTheSameRessourceMultipleTimes(self.name + ' uses the same ressource several times'):
+	self.usefulRessources -> forAll(ur1, ur2 : UsefulRessource | ur1.ressource.name = ur2.ressource.name implies ur1 = ur2)
+
+
+context Ressource
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*') 
+	
+inv nonNegativeQuantity(self.name + ' has a negative quantity of ressources'):
+	self.quantity >= 0
+
+
+context UsefulRessource
+inv strictPositiveUsefulQuantity(self.associatedWorkDefinition.name + ' uses a negative or zero amount of ressources'):
+	self.usefulQuantity > 0
+
+inv usefulQuantityInfOrEquQuantity(self.associatedWorkDefinition.name + ' uses more ressources than are available'):
+	self.usefulQuantity <= self.ressource.quantity
+
+
+endpackage
