@@ -1,0 +1,21 @@
+process cuisiner {
+	wd Decouper {
+		needs 1 of couteau
+		needs 1 of planche
+	}
+	wd Cuire {
+		needs 1 of poele
+	}
+	wd Manger {
+		needs 1 of assiette
+		needs 1 of fourchette
+		needs 1 of couteau
+	}
+	ws f2s from Decouper to Cuire
+	ws f2s from Cuire to Manger
+	ressource couteau 3
+	ressource planche 2
+	ressource poele 1
+	ressource assiette 5
+	ressource fourchette 3
+}

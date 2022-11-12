@@ -22,7 +22,9 @@ ProcessElement_Impl returns ProcessElement:
 
 WorkDefinition returns WorkDefinition:
 	{WorkDefinition}
-	'wd' name=EString ;
+	'wd' name=EString ( '{'
+		usefulRessources+=UsefulRessource*
+	'}' )? ;
 
 WorkSequence returns WorkSequence:
 	'ws' linkType=WorkSequenceType
@@ -37,7 +39,7 @@ Ressource returns Ressource:
 	'ressource' name=EString quantity=EInt ;
 
 UsefulRessource returns UsefulRessource:
-	/* associatedWorkDefinition=[WorkDefinition] (PB : aWD pas détectée depuis le runtime-Eclipse)*/ 'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
+	'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
 
 EInt returns ecore::EInt:
 	'-'? INT ;

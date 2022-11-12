@@ -37,6 +37,7 @@ public class PDLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getProcessAccess().getGroup(), "rule__Process__Group__0");
 			builder.put(grammarAccess.getProcessElement_ImplAccess().getGroup(), "rule__ProcessElement_Impl__Group__0");
 			builder.put(grammarAccess.getWorkDefinitionAccess().getGroup(), "rule__WorkDefinition__Group__0");
+			builder.put(grammarAccess.getWorkDefinitionAccess().getGroup_3(), "rule__WorkDefinition__Group_3__0");
 			builder.put(grammarAccess.getWorkSequenceAccess().getGroup(), "rule__WorkSequence__Group__0");
 			builder.put(grammarAccess.getGuidanceAccess().getGroup(), "rule__Guidance__Group__0");
 			builder.put(grammarAccess.getRessourceAccess().getGroup(), "rule__Ressource__Group__0");
@@ -45,6 +46,7 @@ public class PDLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getProcessAccess().getNameAssignment_2(), "rule__Process__NameAssignment_2");
 			builder.put(grammarAccess.getProcessAccess().getProcessElementsAssignment_4(), "rule__Process__ProcessElementsAssignment_4");
 			builder.put(grammarAccess.getWorkDefinitionAccess().getNameAssignment_2(), "rule__WorkDefinition__NameAssignment_2");
+			builder.put(grammarAccess.getWorkDefinitionAccess().getUsefulRessourcesAssignment_3_1(), "rule__WorkDefinition__UsefulRessourcesAssignment_3_1");
 			builder.put(grammarAccess.getWorkSequenceAccess().getLinkTypeAssignment_1(), "rule__WorkSequence__LinkTypeAssignment_1");
 			builder.put(grammarAccess.getWorkSequenceAccess().getPredecessorAssignment_3(), "rule__WorkSequence__PredecessorAssignment_3");
 			builder.put(grammarAccess.getWorkSequenceAccess().getSuccessorAssignment_5(), "rule__WorkSequence__SuccessorAssignment_5");

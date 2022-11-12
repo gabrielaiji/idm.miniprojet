@@ -1,0 +1,29 @@
+process developpement {
+	wd Conception {
+		needs 2 of concepteur
+		needs 2 of machine
+	}
+	wd RedactionDoc {
+		needs 1 of machine
+		needs 1 of redacteur
+	}
+	wd Programmation {
+		needs 2 of developpeur
+		needs 3 of machine
+	}
+	wd RedactionTests {
+		needs 2 of machine
+		needs 1 of testeur
+	}
+	ws f2f from Conception to RedactionDoc
+	ws s2s from Conception to RedactionDoc
+	ws f2s from Conception to Programmation
+	ws s2s from Conception to RedactionTests
+	ws f2f from Programmation to RedactionTests
+	note "A guidance"
+	ressource concepteur 3
+	ressource developpeur 2
+	ressource machine 4
+	ressource redacteur 1
+	ressource testeur 2
+}

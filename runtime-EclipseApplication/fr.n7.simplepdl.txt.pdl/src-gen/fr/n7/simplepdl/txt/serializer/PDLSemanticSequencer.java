@@ -167,17 +167,11 @@ public class PDLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WorkDefinition returns WorkDefinition
 	 *
 	 * Constraint:
-	 *     name=EString
+	 *     (name=EString usefulRessources+=UsefulRessource*)
 	 * </pre>
 	 */
 	protected void sequence_WorkDefinition(ISerializationContext context, WorkDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SimplepdlPackage.Literals.WORK_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimplepdlPackage.Literals.WORK_DEFINITION__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWorkDefinitionAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

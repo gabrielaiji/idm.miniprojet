@@ -153,14 +153,23 @@ public class PDLGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final Keyword cWdKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameEStringParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cUsefulRessourcesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cUsefulRessourcesUsefulRessourceParserRuleCall_3_1_0 = (RuleCall)cUsefulRessourcesAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//WorkDefinition returns WorkDefinition:
 		//    {WorkDefinition}
-		//    'wd' name=EString ;
+		//    'wd' name=EString ( '{'
+		//        usefulRessources+=UsefulRessource*
+		//    '}' )? ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{WorkDefinition}
-		//'wd' name=EString
+		//'wd' name=EString ( '{'
+		//    usefulRessources+=UsefulRessource*
+		//'}' )?
 		public Group getGroup() { return cGroup; }
 		
 		//{WorkDefinition}
@@ -174,6 +183,23 @@ public class PDLGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		
 		//EString
 		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
+		
+		//( '{'
+		//       usefulRessources+=UsefulRessource*
+		//   '}' )?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
+		
+		//usefulRessources+=UsefulRessource*
+		public Assignment getUsefulRessourcesAssignment_3_1() { return cUsefulRessourcesAssignment_3_1; }
+		
+		//UsefulRessource
+		public RuleCall getUsefulRessourcesUsefulRessourceParserRuleCall_3_1_0() { return cUsefulRessourcesUsefulRessourceParserRuleCall_3_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 	public class WorkSequenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.n7.simplepdl.txt.PDL.WorkSequence");
@@ -306,13 +332,13 @@ public class PDLGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final RuleCall cRessourceRessourceIDTerminalRuleCall_3_0_1 = (RuleCall)cRessourceRessourceCrossReference_3_0.eContents().get(1);
 		
 		//UsefulRessource returns UsefulRessource:
-		//    /* associatedWorkDefinition=[WorkDefinition] (PB : aWD pas détectée depuis le runtime-Eclipse)*/ 'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
+		//    'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		///* associatedWorkDefinition=[WorkDefinition] (PB : aWD pas détectée depuis le runtime-Eclipse)*/ 'needs' usefulQuantity=EInt 'of' ressource=[Ressource]
+		//'needs' usefulQuantity=EInt 'of' ressource=[Ressource]
 		public Group getGroup() { return cGroup; }
 		
-		///* associatedWorkDefinition=[WorkDefinition] (PB : aWD pas détectée depuis le runtime-Eclipse)*/ 'needs'
+		//'needs'
 		public Keyword getNeedsKeyword_0() { return cNeedsKeyword_0; }
 		
 		//usefulQuantity=EInt
@@ -509,7 +535,9 @@ public class PDLGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	
 	//WorkDefinition returns WorkDefinition:
 	//    {WorkDefinition}
-	//    'wd' name=EString ;
+	//    'wd' name=EString ( '{'
+	//        usefulRessources+=UsefulRessource*
+	//    '}' )? ;
 	public WorkDefinitionElements getWorkDefinitionAccess() {
 		return pWorkDefinition;
 	}
@@ -552,7 +580,7 @@ public class PDLGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//UsefulRessource returns UsefulRessource:
-	//    /* associatedWorkDefinition=[WorkDefinition] (PB : aWD pas détectée depuis le runtime-Eclipse)*/ 'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
+	//    'needs' usefulQuantity=EInt 'of' ressource=[Ressource] ;
 	public UsefulRessourceElements getUsefulRessourceAccess() {
 		return pUsefulRessource;
 	}

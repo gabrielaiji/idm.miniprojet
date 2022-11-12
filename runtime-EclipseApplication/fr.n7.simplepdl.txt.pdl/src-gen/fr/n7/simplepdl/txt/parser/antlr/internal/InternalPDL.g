@@ -310,6 +310,35 @@ ruleWorkDefinition returns [EObject current=null]
 				}
 			)
 		)
+		(
+			otherlv_3='{'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getWorkDefinitionAccess().getLeftCurlyBracketKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getWorkDefinitionAccess().getUsefulRessourcesUsefulRessourceParserRuleCall_3_1_0());
+					}
+					lv_usefulRessources_4_0=ruleUsefulRessource
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getWorkDefinitionRule());
+						}
+						add(
+							$current,
+							"usefulRessources",
+							lv_usefulRessources_4_0,
+							"fr.n7.simplepdl.txt.PDL.UsefulRessource");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)*
+			otherlv_5='}'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getWorkDefinitionAccess().getRightCurlyBracketKeyword_3_2());
+			}
+		)?
 	)
 ;
 
@@ -492,6 +521,65 @@ ruleRessource returns [EObject current=null]
 						lv_quantity_2_0,
 						"fr.n7.simplepdl.txt.PDL.EInt");
 					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleUsefulRessource
+entryRuleUsefulRessource returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getUsefulRessourceRule()); }
+	iv_ruleUsefulRessource=ruleUsefulRessource
+	{ $current=$iv_ruleUsefulRessource.current; }
+	EOF;
+
+// Rule UsefulRessource
+ruleUsefulRessource returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='needs'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getUsefulRessourceAccess().getNeedsKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getUsefulRessourceAccess().getUsefulQuantityEIntParserRuleCall_1_0());
+				}
+				lv_usefulQuantity_1_0=ruleEInt
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getUsefulRessourceRule());
+					}
+					set(
+						$current,
+						"usefulQuantity",
+						lv_usefulQuantity_1_0,
+						"fr.n7.simplepdl.txt.PDL.EInt");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_2='of'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getUsefulRessourceAccess().getOfKeyword_2());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getUsefulRessourceRule());
+					}
+				}
+				otherlv_3=RULE_ID
+				{
+					newLeafNode(otherlv_3, grammarAccess.getUsefulRessourceAccess().getRessourceRessourceCrossReference_3_0());
 				}
 			)
 		)
