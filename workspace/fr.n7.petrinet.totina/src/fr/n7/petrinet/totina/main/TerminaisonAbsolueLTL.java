@@ -35,14 +35,14 @@ public class TerminaisonAbsolueLTL extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/fr/n7/petrinet/totina/main/terminaisonAbsolue.LTL";
+    public static final String MODULE_FILE_NAME = "/fr/n7/petrinet/totina/main/terminaisonAbsolueLTL";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "terminaisonAbsolueLTL" };
+    public static final String[] TEMPLATE_NAMES = { "terminaisonInexistenceLTL" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
