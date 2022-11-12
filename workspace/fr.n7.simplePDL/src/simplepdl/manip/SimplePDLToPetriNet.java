@@ -35,7 +35,8 @@ public class SimplePDLToPetriNet {
 	
 	public static void main(String[] args) {
 		
-		// Charger le package SimplePDL afin de l'enregistrer dans le registre d'Eclipse.
+		// Charger les packages SimplePDL et PetriNet afin de les enregistrer
+		// dans le registre d'Eclipse.
 		SimplepdlPackage simpplePDLPackageInstance = SimplepdlPackage.eINSTANCE;
 		PetrinetPackage petriNetPackageInstance = PetrinetPackage.eINSTANCE;
 		
@@ -50,14 +51,14 @@ public class SimplePDLToPetriNet {
 		ResourceSet simpResSet = new ResourceSetImpl();
 		ResourceSet petriResSet = new ResourceSetImpl();
 
-		// Definir les ressources (la source simplePDL et target petriNet)
+		// Definir les ressources (la source simplePDL et la target petriNet)
 		URI simplePDLModelURI = URI.createURI("developpementAvecRessources.xmi");
 		Resource simpRessource = simpResSet.getResource(simplePDLModelURI, true);
 		
 		URI petriNetmodelURI = URI.createURI("models/petriDeveloppementWithJava.xmi");
 		Resource petriResource = petriResSet.createResource(petriNetmodelURI);
 				
-		// La fabrique pour fabriquer les elements de SimplePDL
+		// La fabrique pour fabriquer les elements du metamodele PetriNet
 		PetrinetFactory myFactory = PetrinetFactory.eINSTANCE;
 
 		// Traduire l'element Process en Petri
@@ -72,7 +73,7 @@ public class SimplePDLToPetriNet {
 		//tab[0] -> A_Idle
 		//tab[1] -> A_Running
 		//tab[2] -> A_Finished
-		//tab[3] -> A_Has_Started
+		//tab[3] -> A_Started
 		//tab[4] -> Start_Transition
 		//tab[5] -> Finish_Transition
 		HashMap<String, Node[]> wdMap = new HashMap<String, Node[]>();
@@ -81,7 +82,6 @@ public class SimplePDLToPetriNet {
 		
 		ArrayList<WorkDefinition> wdLst = new ArrayList<WorkDefinition>();
 		ArrayList<WorkSequence> wsLst = new ArrayList<WorkSequence>();
-		ArrayList<Guidance> gLst = new ArrayList<Guidance>();
 		
 		
 		for (ProcessElement element : process.getProcessElements()) {
@@ -95,8 +95,6 @@ public class SimplePDLToPetriNet {
 				wsLst.add(ws);
 			}
 			else if(element instanceof Guidance) {
-				Guidance gui = (Guidance) element;
-				gLst.add(gui);
 			}
 			else if(element instanceof Ressource) {
 				Ressource res = (Ressource) element;
