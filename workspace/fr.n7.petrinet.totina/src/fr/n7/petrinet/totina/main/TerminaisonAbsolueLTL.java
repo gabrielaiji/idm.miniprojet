@@ -25,24 +25,24 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
- * Entry point of the 'TerminaisonLTL' generation module.
+ * Entry point of the 'TerminaisonAbsolue.LTL' generation module.
  *
  * @generated
  */
-public class TerminaisonLTL extends AbstractAcceleoGenerator {
+public class TerminaisonAbsolueLTL extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/fr/n7/petrinet/totina/main/terminaisonLTL";
+    public static final String MODULE_FILE_NAME = "/fr/n7/petrinet/totina/main/terminaisonAbsolue.LTL";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "terminaisonLTL" };
+    public static final String[] TEMPLATE_NAMES = { "terminaisonAbsolueLTL" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -65,7 +65,7 @@ public class TerminaisonLTL extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public TerminaisonLTL() {
+    public TerminaisonAbsolueLTL() {
         // Empty implementation
     }
 
@@ -85,7 +85,7 @@ public class TerminaisonLTL extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public TerminaisonLTL(URI modelURI, File targetFolder,
+    public TerminaisonAbsolueLTL(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -106,7 +106,7 @@ public class TerminaisonLTL extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public TerminaisonLTL(EObject model, File targetFolder,
+    public TerminaisonAbsolueLTL(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -141,7 +141,7 @@ public class TerminaisonLTL extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                TerminaisonLTL generator = new TerminaisonLTL(modelURI, folder, arguments);
+                TerminaisonAbsolueLTL generator = new TerminaisonAbsolueLTL(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.

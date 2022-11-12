@@ -1,16 +1,18 @@
 [comment encoding = UTF-8 /]
-[module terminaisonLTL('http://simplepdl')]
+[module terminaisonAbsolue.LTL('http://simplepdl')]
 
 
-[template public terminaisonLTL(aProcess : Process)]
+[template public terminaisonAbsolueLTL(aProcess : Process)]
 [comment @main/]
-[file (aProcess.name + 'Terminaison.ltl', false, 'UTF-8')]
+[file (aProcess.name + 'TerminaisonAbsolue.ltl', false, 'UTF-8')]
+
+ <> ( 1
 [let wds : OrderedSet(WorkDefinition) = aProcess.getWD()]
 [for (wd : WorkDefinition | wds)]
-<> [wd.name/]_Finished;
+/\ [wd.name/]_Finished
 [/for]
 [/let]
-
+);
 
 [/file]
 [/template]
