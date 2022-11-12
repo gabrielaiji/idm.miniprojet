@@ -63,7 +63,7 @@ public class SimplePDLToPetriNet {
 		// Traduire l'element Process en Petri
 		Process process = (Process) simpRessource.getContents().get(0);
 		Petri petri = myFactory.createPetri();
-		petri.setName(process.getName());
+		petri.setName(process.getName() + "Java");
 		petriResource.getContents().add(petri);
 		
 		

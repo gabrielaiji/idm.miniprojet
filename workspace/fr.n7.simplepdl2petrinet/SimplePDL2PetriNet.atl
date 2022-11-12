@@ -13,7 +13,7 @@ def: getProcess(): simplepdl!Process =
 -- Traduire un Process en un Petri de m�me nom
 rule Process2Petri {
 	from p: simplepdl!Process
-	to pn: petrinet!Petri (name <- p.name)
+	to pn: petrinet!Petri (name <- p.name + 'ATL')
 }
 
 -- Traduire une WorkDefinition en un motif sur le r�seau de Petri
