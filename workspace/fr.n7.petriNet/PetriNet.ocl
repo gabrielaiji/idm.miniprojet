@@ -17,10 +17,13 @@ inv uniqueNamesTransitions('Duplicate names for transitions'):
 						-> collect(p : PetriElement | p.oclAsType(Transition))
 						-> forAll(t1, t2 : Transition | t1.name = t2.name implies t1 = t2)
 
-inv notSeveralArcsBetweenTwoNodes('Several arcs have the same sources and targets'):
+inv notSeveralArcsOfSameTypeBetweenTwoNodes('Several arcs of the same type have the same sources and targets'):
 	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Arc))
 						-> collect(p : PetriElement | p.oclAsType(Arc))
-						-> forAll(a1, a2 : Arc | (a1.source = a2.source and a1.target = a2.target) implies a1 = a2)
+						-> forAll(a1, a2 : Arc | (a1.source = a2.source
+											  and a1.target = a2.target
+											  and a1.arcType = a2.arcType)
+											  	implies a1 = a2)
 
 
 context Arc
@@ -47,9 +50,6 @@ inv readArcFromPlace('A read arc cannot start from a transition'):
 
 
 context Node
-inv atLeast2Characters(self.name + ' is less than 2 characters'):
-	self.name.size() >= 2
-
 inv validName('Invalid name: ' + self.name):
 	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
 
