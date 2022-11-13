@@ -17,6 +17,11 @@ inv uniqueNamesTransitions('Duplicate names for transitions'):
 						-> collect(p : PetriElement | p.oclAsType(Transition))
 						-> forAll(t1, t2 : Transition | t1.name = t2.name implies t1 = t2)
 
+inv noTokensInNet(self.name + ' does not contain any tokens'):
+	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Place))
+						-> collect(p : PetriElement | p.oclAsType(Place))
+						-> exists(p : Place | p.nbTokens > 0)
+
 inv notSeveralArcsOfSameTypeBetweenTwoNodes('Several arcs of the same type have the same sources and targets'):
 	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Arc))
 						-> collect(p : PetriElement | p.oclAsType(Arc))
@@ -46,7 +51,7 @@ inv noTransitionToTransition('An arc cannot start from a transition and point to
 	not(self.source.oclIsKindOf(Transition) and self.target.oclIsKindOf(Transition))
 	
 inv readArcFromPlace('A read arc cannot start from a transition'):
-	self.arcType = 1 implies self.source.oclIsKindOf(Place)
+	self.arcType = ArcType::readArc implies self.source.oclIsKindOf(Place)
 
 
 context Node
