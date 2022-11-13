@@ -6,15 +6,17 @@
 [comment @main/]
 [file (aProcess.name + '.ltl', false, 'UTF-8')]
 
-[comment Chaque activité est soit non commencée, soit en cours, soit terminée/]
+
 [let wds : OrderedSet(WorkDefinition) = aProcess.getWD()]
 [for (wd : WorkDefinition | wds)]
-['[]'/] ( [wd.name/]_Idle \/[wd.name/]_Running \/ [wd.name/]_Finished );
+['[]'/] ( [wd.name/]_Idle \/[wd.name/]_Running \/ [wd.name/]_Finished );[comment Chaque activité est soit non commencée, soit en cours, soit terminée/]
 - ['[]'/] ( [wd.name/]_Idle /\ [wd.name/]_Running );
 - ['[]'/] ( [wd.name/]_Idle /\ [wd.name/]_Finished );
 - ['[]'/] ( [wd.name/]_Finished /\ [wd.name/]_Running );
-['[]'/] ( [wd.name/]_Finished => ['[]'/] [wd.name/]_Finished);[comment Si une activité finit, elle reste toujours finit/]
-['[]'/] ( [wd.name/]_Running => ['[]'/] [wd.name/]_Started);[comment Si une activité est en cours, elle a commence/]
+
+( [wd.name/]_Finished => ['[]'/] [wd.name/]_Finished);[comment Si une activité finit, elle reste toujours finit/]
+( -[wd.name/]_Idle => ['[]'/] [wd.name/]_Started);[comment Si une activité terminée n'évolue plus/]
+
 
 [/for]
 [/let]
