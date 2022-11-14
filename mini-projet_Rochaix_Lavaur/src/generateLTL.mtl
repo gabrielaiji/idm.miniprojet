@@ -1,0 +1,56 @@
+[comment encoding = UTF-8 /]
+[module generateLTL('http://simplepdl')]
+
+
+[template public generateLTL(aProcess : Process)]
+[comment @main/]
+[file (aProcess.name + '.ltl', false, 'UTF-8')]
+
+
+[let wds : OrderedSet(WorkDefinition) = aProcess.getWD()]
+[for (wd : WorkDefinition | wds)]
+['[]'/] ( [wd.name/]_Idle \/[wd.name/]_Running \/ [wd.name/]_Finished );[comment Chaque activité est soit non commencée, soit en cours, soit terminée/]
+- ['[]'/] ( [wd.name/]_Idle /\ [wd.name/]_Running );
+- ['[]'/] ( [wd.name/]_Idle /\ [wd.name/]_Finished );
+- ['[]'/] ( [wd.name/]_Finished /\ [wd.name/]_Running );
+
+( [wd.name/]_Finished => ['[]'/] [wd.name/]_Finished);[comment Si une activité finit, elle reste toujours finit/]
+( -[wd.name/]_Idle => ['[]'/] [wd.name/]_Started);[comment Si une activité terminée n'évolue plus/]
+
+
+[/for]
+[/let]
+
+[let wss : OrderedSet(WorkSequence) = aProcess.getWS()]
+[for (ws : WorkSequence | wss)]
+
+[if (ws.linkType = WorkSequenceType::startToStart)]
+- [ws.predecessor.name/]_Started => [ws.successor.name/]_Idle ;[comment Si le predecessor n'a pas commence, le successor est Idle/]
+[/if]
+[if (ws.linkType = WorkSequenceType::finishToStart)]
+- [ws.predecessor.name/]_Finished => [ws.successor.name/]_Idle ;[comment Si le predecessor n'a pas fnit, le successor est Idle/]
+[/if]
+[if (ws.linkType = WorkSequenceType::startToFinish)]
+- [ws.predecessor.name/]_Started => - [ws.successor.name/]_Finished ;[comment Si le predecessor n'a pas commence, le successor n'a pas finit/]
+[/if]
+[if (ws.linkType = WorkSequenceType::finishToFinish)]
+- [ws.predecessor.name/]_Finished => - [ws.successor.name/]_Finished ;[comment Si le predecessor n'a pas finit, le successor n'a pas finit/]
+[/if]
+
+[/for]
+[/let]
+
+[/file]
+[/template]
+
+[query public getWD(p: Process) : OrderedSet(WorkDefinition) =
+p.processElements->select( e | e.oclIsTypeOf(WorkDefinition) )
+->collect( e | e.oclAsType(WorkDefinition) )
+->asOrderedSet()
+/]
+
+[query public getWS(p: Process) : OrderedSet(WorkSequence) =
+p.processElements->select( e | e.oclIsTypeOf(WorkSequence) )
+->collect( e | e.oclAsType(WorkSequence) )
+->asOrderedSet()
+/]

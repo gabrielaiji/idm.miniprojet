@@ -1,34 +1,34 @@
 
+pl Conception_Idle (1)
+pl Conception_Started (0)
+pl Conception_Running (0)
+pl Conception_Finished (0)
+pl RedactionDoc_Idle (1)
+pl RedactionDoc_Started (0)
+pl RedactionDoc_Running (0)
+pl RedactionDoc_Finished (0)
+pl Programmation_Idle (1)
+pl Programmation_Started (0)
+pl Programmation_Running (0)
+pl Programmation_Finished (0)
+pl RedactionTests_Idle (1)
+pl RedactionTests_Started (0)
+pl RedactionTests_Running (0)
+pl RedactionTests_Finished (0)
 pl concepteur (3)
 pl developpeur (2)
 pl machine (4)
 pl redacteur (1)
 pl testeur (2)
-pl Conception_Idle (1)
-pl Conception_Running (0)
-pl Conception_Finished (0)
-pl Conception_Has_Started (0)
-pl RedactionDoc_Idle (1)
-pl RedactionDoc_Running (0)
-pl RedactionDoc_Finished (0)
-pl RedactionDoc_Has_Started (0)
-pl Programmation_Idle (1)
-pl Programmation_Running (0)
-pl Programmation_Finished (0)
-pl Programmation_Has_Started (0)
-pl RedactionTests_Idle (1)
-pl RedactionTests_Running (0)
-pl RedactionTests_Finished (0)
-pl RedactionTests_Has_Started (0)
 
 
-tr Start_Conception Conception_Idle*1  concepteur*2  machine*2 -> Conception_Running*1  Conception_Has_Started*1 
+tr Start_Conception Conception_Idle*1  concepteur*2  machine*2 -> Conception_Started*1  Conception_Running*1 
 tr Finish_Conception Conception_Running*1 -> Conception_Finished*1  concepteur*2  machine*2 
-tr Start_RedactionDoc RedactionDoc_Idle*1  machine*1  redacteur*1  Conception_Has_Started?1 -> RedactionDoc_Running*1  RedactionDoc_Has_Started*1 
+tr Start_RedactionDoc RedactionDoc_Idle*1  Conception_Started?1  machine*1  redacteur*1 -> RedactionDoc_Started*1  RedactionDoc_Running*1 
 tr Finish_RedactionDoc RedactionDoc_Running*1  Conception_Finished?1 -> RedactionDoc_Finished*1  machine*1  redacteur*1 
-tr Start_Programmation Programmation_Idle*1  developpeur*2  machine*3  Conception_Finished?1 -> Programmation_Running*1  Programmation_Has_Started*1 
+tr Start_Programmation Programmation_Idle*1  Conception_Finished?1  developpeur*2  machine*3 -> Programmation_Started*1  Programmation_Running*1 
 tr Finish_Programmation Programmation_Running*1 -> Programmation_Finished*1  developpeur*2  machine*3 
-tr Start_RedactionTests RedactionTests_Idle*1  machine*2  testeur*1  Conception_Has_Started?1 -> RedactionTests_Running*1  RedactionTests_Has_Started*1 
+tr Start_RedactionTests RedactionTests_Idle*1  Conception_Started?1  machine*2  testeur*1 -> RedactionTests_Started*1  RedactionTests_Running*1 
 tr Finish_RedactionTests RedactionTests_Running*1  Programmation_Finished?1 -> RedactionTests_Finished*1  machine*2  testeur*1 
 
 

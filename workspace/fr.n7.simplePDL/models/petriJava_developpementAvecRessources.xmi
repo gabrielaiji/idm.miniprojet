@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<petrinet:Petri xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" name="developpement">
+<petrinet:Petri xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" name="developpementJava">
   <petriElements xsi:type="petrinet:Place" name="concepteur" outgoingArcs="//@petriElements.16" incomingArcs="//@petriElements.17" nbTokens="3"/>
   <petriElements xsi:type="petrinet:Place" name="developpeur" outgoingArcs="//@petriElements.46" incomingArcs="//@petriElements.47" nbTokens="2"/>
   <petriElements xsi:type="petrinet:Place" name="machine" outgoingArcs="//@petriElements.18 //@petriElements.31 //@petriElements.48 //@petriElements.61" incomingArcs="//@petriElements.19 //@petriElements.32 //@petriElements.49 //@petriElements.62" nbTokens="4"/>
