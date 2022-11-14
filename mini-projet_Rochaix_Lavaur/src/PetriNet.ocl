@@ -1,0 +1,67 @@
+import 'PetriNet.ecore'
+
+package petrinet
+
+
+context Petri
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+inv uniqueNamesPlaces('Duplicate names for places'):
+	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Place))
+						-> collect(p : PetriElement | p.oclAsType(Place))
+						-> forAll(p1, p2 : Place | p1.name = p2.name implies p1 = p2)
+
+inv uniqueNamesTransitions('Duplicate names for transitions'):
+	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Transition))
+						-> collect(p : PetriElement | p.oclAsType(Transition))
+						-> forAll(t1, t2 : Transition | t1.name = t2.name implies t1 = t2)
+
+inv noTokensInNet(self.name + ' does not contain any tokens'):
+	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Place))
+						-> collect(p : PetriElement | p.oclAsType(Place))
+						-> exists(p : Place | p.nbTokens > 0)
+
+inv notSeveralArcsOfSameTypeBetweenTwoNodes('Several arcs of the same type have the same sources and targets'):
+	self.petriElements -> select(p : PetriElement | p.oclIsKindOf(Arc))
+						-> collect(p : PetriElement | p.oclAsType(Arc))
+						-> forAll(a1, a2 : Arc | (a1.source = a2.source
+											  and a1.target = a2.target
+											  and a1.arcType = a2.arcType)
+											  	implies a1 = a2)
+
+
+context Arc
+inv sourceAndTargetInSameNet('Nodes not in the same net : '
+		+ self.source.name + ' in ' + self.source.net.name + ' and '
+		+ self.target.name + ' in ' + self.target.net.name):
+	self.net = self.target.net
+	and self.net = self.source.net
+
+inv nonReflexive(self.source.name + ' has a reflexive dependence'):
+	self.source <> self.target
+	
+inv strictPositiveWeight('An arc has a negative or zero weight'):
+	self.weight > 0
+
+inv noPlaceToPlace('An arc cannot start from a place and point to a place'):
+	not(self.source.oclIsKindOf(Place) and self.target.oclIsKindOf(Place))
+
+inv noTransitionToTransition('An arc cannot start from a transition and point to a transition'):
+	not(self.source.oclIsKindOf(Transition) and self.target.oclIsKindOf(Transition))
+	
+inv readArcFromPlace('A read arc cannot start from a transition'):
+	self.arcType = ArcType::readArc implies self.source.oclIsKindOf(Place)
+
+
+context Node
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+
+context Place
+inv nonNegativeNbTokens(self.name + ' has a negative number of tokens'):
+	self.nbTokens >= 0
+
+
+endpackage

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<petrinet:Petri
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:petrinet="http://petrinet"
+    xsi:schemaLocation="http://petrinet PetriNet.ecore"
+    name="otherProblems">
+  <petriElements
+      xsi:type="petrinet:Place"
+      name="P1"
+      outgoingArcs="//@petriElements.1"
+      incomingArcs="//@petriElements.1"
+      nbTokens="1"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      source="//@petriElements.0"
+      target="//@petriElements.0"
+      arcType="normalArc"/>
+  <petriElements
+      xsi:type="petrinet:Place"
+      name="P2"
+      outgoingArcs="//@petriElements.3 //@petriElements.4"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      source="//@petriElements.2"
+      target="//@petriElements.5"
+      arcType="normalArc"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      source="//@petriElements.2"
+      target="//@petriElements.5"
+      arcType="normalArc"/>
+  <petriElements
+      xsi:type="petrinet:Transition"
+      name="T1"
+      outgoingArcs="//@petriElements.6"
+      incomingArcs="//@petriElements.3 //@petriElements.4"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      source="//@petriElements.5"
+      target="//@petriElements.7"
+      arcType="readArc"/>
+  <petriElements
+      xsi:type="petrinet:Transition"
+      name="T2"
+      incomingArcs="//@petriElements.6"/>
+</petrinet:Petri>

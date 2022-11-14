@@ -1,0 +1,138 @@
+module SimplePDL2PetriNet;
+create OUT: petrinet from  IN: simplepdl;
+
+-- Obtenir le processus qui contient ce process element.
+-- Remarque: Ce helper ne serait pas utile si une r�f�rence opposite
+-- avait �t� plac�e entre Process et ProcessElement
+helper context simplepdl!ProcessElement
+def: getProcess(): simplepdl!Process =
+	simplepdl!Process.allInstances()
+		->select(p | p.processElements->includes(self))
+		->asSequence()->first();
+
+-- Traduire un Process en un Petri de m�me nom
+rule Process2Petri {
+	from p: simplepdl!Process
+	to pn: petrinet!Petri (name <- p.name + 'ATL')
+}
+
+-- Traduire une WorkDefinition en un motif sur le r�seau de Petri
+rule WorkDefinition2PetriNet {
+	from wd: simplepdl!WorkDefinition
+	to
+		-- PLACES d'une WorkDefinition
+		p_idle: petrinet!Place(
+				name <- wd.name + '_Idle',
+				nbTokens <- 1,
+				net <- wd.getProcess()),
+		
+		p_started: petrinet!Place(
+				name <- wd.name + '_Started',
+				nbTokens <- 0,
+				net <- wd.getProcess()),
+				
+		p_running: petrinet!Place(
+				name <- wd.name + '_Running',
+				nbTokens <- 0,
+				net <- wd.getProcess()),
+				
+		p_finished: petrinet!Place(
+				name <- wd.name + '_Finished',
+				nbTokens <- 0,
+				net <- wd.getProcess()),
+				
+		-- TRANSITIONS d'une WorkDefinition
+		p_start: petrinet!Transition(
+				name <- 'Start_' + wd.name,
+				net <- wd.getProcess()),
+				
+		p_finish: petrinet!Transition(
+				name <-  'Finish_' + wd.name,
+				net <- wd.getProcess()),
+				
+		-- ARCS d'une WorkDefinition
+		p_ready2start: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_idle,
+				target <- p_start,
+				weight <- 1),
+				
+		p_start2started: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_start,
+				target <- p_started,
+				weight <- 1),
+				
+		p_start2running: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_start,
+				target <- p_running,
+				weight <- 1),
+				
+		p_running2finish: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_running,
+				target <- p_finish,
+				weight <- 1),
+				
+		p_finish2finished: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- wd.getProcess(),
+				source <- p_finish,
+				target <- p_finished,
+				weight <- 1)
+}
+
+-- Traduire une WorkSequence en un motif sur le r�seau de Petri
+rule WorkSequence2PetriNet {
+	from ws: simplepdl!WorkSequence
+	to
+		-- ARC d'une WorkSequence
+		p_worksequence: petrinet!Arc(
+				arcType <- #readArc,
+				net <- ws.getProcess(),
+				source <- thisModule.resolveTemp(ws.predecessor, if (ws.linkType = #startToStart or ws.linkType = #startToFinish)
+																 then 'p_started'
+																 else 'p_finished'
+																 endif),
+				target <- thisModule.resolveTemp(ws.successor, if (ws.linkType = #startToStart or ws.linkType = #finishToStart)
+															   then 'p_start'
+															   else 'p_finish'
+															   endif),
+				weight <- 1)
+}
+
+-- Traduire une Ressource en un motif sur le r�seau de Petri
+rule Ressource2PetriNet {
+	from r: simplepdl!Ressource
+	to
+		-- PLACE d'une Ressource
+		p_ressource: petrinet!Place(
+				name <- r.name,
+				nbTokens <- r.quantity,
+				net <- r.getProcess())
+}
+
+-- Traduire une UsefulRessource en un motif sur le r�seau de Petri
+rule UsefulRessource2PetriNet {
+	from ur: simplepdl!UsefulRessource
+	to
+		-- ARCS d'une UsefulRessource
+		p_ressource2start: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- ur.associatedWorkDefinition.getProcess(),
+				source <- thisModule.resolveTemp(ur.ressource, 'p_ressource'),
+				target <- thisModule.resolveTemp(ur.associatedWorkDefinition, 'p_start'),
+				weight <- ur.usefulQuantity),
+				
+		p_finish2ressource: petrinet!Arc(
+				arcType <- #normalArc,
+				net <- ur.associatedWorkDefinition.getProcess(),
+				source <- thisModule.resolveTemp(ur.associatedWorkDefinition, 'p_finish'),
+				target <- thisModule.resolveTemp(ur.ressource, 'p_ressource'),
+				weight <- ur.usefulQuantity)
+}
