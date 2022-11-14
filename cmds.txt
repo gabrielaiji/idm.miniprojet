@@ -1,0 +1,11 @@
+tina developpementJava.net developpementJava.ktz
+tina developpementATL.net developpementATL.ktz
+
+
+selt -p -S developpementJava.scn developpementJava.ktz -prelude developpement.ltl
+selt -p -S developpementJava.scn developpementJava.ktz -prelude developpementTerminaisonAbsolue.ltl
+selt -p -S developpementJava.scn developpementJava.ktz -prelude developpementTerminaisonInexistence.ltl
+
+selt -p -S developpementATL.scn developpementATL.ktz -prelude developpement.ltl
+selt -p -S developpementATL.scn developpementATL.ktz -prelude developpementTerminaisonAbsolue.ltl
+selt -p -S developpementATL.scn developpementATL.ktz -prelude developpementTerminaisonInexistence.ltl
